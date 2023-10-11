@@ -1,0 +1,70 @@
+/* Dracula colors */
+@define-color background  #282a36;
+@define-color currentline #44475a;
+@define-color selection   #44475a;
+@define-color foreground  #f8f8f2;
+@define-color comment     #6272a4;
+
+@define-color cyan      #8be9fd;
+@define-color green     #50fa7b;
+@define-color orange    #ff79c6;
+@define-color pink      #ffb86c;
+@define-color purple    #bd93f9;
+@define-color red       #ff5555;
+@define-color yellow    #f1fa8c;
+
+window {
+  font-family: "RobotoMono Medium", "Font Awesome 5 Free";
+  margin: 0px;
+  border: 2px solid @green;
+  background-color: @background;
+  border-radius: none;
+}
+
+#input {
+  margin: 5px;
+  border: none;
+  color: @foreground;
+  background-color: @currentline;
+}
+
+#inner-box {
+  margin: 5px;
+  border: none;
+  background-color: transparent;
+}
+
+#outer-box {
+  margin: 5px;
+  border: none;
+  background-color: transparent;
+}
+
+#scroll {
+  margin: 0px;
+  border: none;
+}
+
+#text {
+  margin: 5px;
+  border: none;
+  color: @foreground;
+}
+
+#text:selected {
+  background-color: @selection;
+}
+
+#entry {
+  border: none;
+}
+
+#entry:focus {
+  border: none;
+}
+
+#entry:selected {
+  background-color: @selection;
+  border-radius: none;
+  border: none;
+}

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+# Copy config
+rcopy_config() {
+  local config_path="~/.config/$1"
+  local backup_path="$PWD/config/$1"
+
+  echo "Copy: $config_path"
+  cp -r $config_path $backup_path
+}
+
+rcopy_config "sway"
+rcopy_config "waybar"
+rcopy_config "wofi"
+rcopy_config "foot"
+rcopy_config "nvim"
+rcopy_config "cava"
+rcopy_config "mako"
+rcopy_config "mc"
+rcopy_config "mpv"
+
+# Copy sway-start
+cp /usr/bin/sway-start sway-start

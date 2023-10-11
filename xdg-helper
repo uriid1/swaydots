@@ -1,0 +1,49 @@
+#!/usr/bin/env lua
+
+-- Default setup
+local DEFAULT_BROWSER = 'firefox.desktop'
+
+local type_to_app = {
+  ['audio'] = nil,
+  ['video'] = 'mpv.desktop',
+  ['image'] = 'imv.desktop',
+  ['text'] = nil,
+  ['font'] = nil,
+  ['model'] = nil,
+  ['application'] = nil,
+  ['chemical'] = nil,
+  ['message'] = nil,
+  ['multipart'] = nil,
+  ['x-conference'] = nil,
+  ['x-epoc'] = nil,
+}
+
+local FILEPATH = '/etc/mime.types'
+local re_xdg = 'xdg-mime default %s %s'
+
+local function popen(command)
+  print("Exec: "..command)
+  local file = io.popen(command, 'r')
+  local output = file:read('*all')
+
+  file:close()
+  if output ~= '' then
+    print(output)
+  end
+end
+
+-- Set default application
+for line in io.lines(FILEPATH) do
+  local capture_type, capture_format = line:match('^([A-z0-9%-%.]+)/([A-z0-9%-%.]+)')
+  local app_name = type_to_app[capture_type]
+
+  if capture_type and capture_format and app_name then
+    popen(re_xdg:format(app_name, capture_type..'/'..capture_format))
+  end
+end
+
+-- Set default browser
+if DEFAULT_BROWSER then
+  popen('xdg-mime default '..DEFAULT_BROWSER..' x-scheme-handler/https x-scheme-handler/http')
+  popen('xdg-settings set default-web-browser '..DEFAULT_BROWSER)
+end
